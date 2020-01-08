@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import PropTypes from "prop-types";
+import AppIcon from "../images/icon.png";
 
 import {
   withStyles,
@@ -10,8 +11,10 @@ import {
   Button,
   CircularProgress
 } from "@material-ui/core";
-import PropTypes from "prop-types";
-import AppIcon from "../images/icon.png";
+
+// Redux imports
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
 
 const styles = theme => ({
   form: {
@@ -40,41 +43,22 @@ const styles = theme => ({
   }
 });
 
-export class login extends Component {
+class login extends Component {
   constructor() {
     super();
     this.state = {
       email: "",
       password: "",
-      loading: false,
       errors: {}
     };
   }
   handleSubmit = event => {
     event.preventDefault();
-    this.setState({
-      loading: true
-    });
     const userData = {
       email: this.state.email,
       password: this.state.password
     };
-    axios
-      .post("/login", userData)
-      .then(res => {
-        console.log(res.data);
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        this.setState({
-          loading: false
-        });
-        this.props.history.push("/");
-      })
-      .catch(err => {
-        this.setState({
-          errors: err.response.data,
-          loading: false
-        });
-      });
+    this.props.loginUser(userData, this.props.history);
   };
   handleChange = event => {
     this.setState({
@@ -82,8 +66,11 @@ export class login extends Component {
     });
   };
   render() {
-    const { classes } = this.props;
-    const { errors, loading } = this.state;
+    const {
+      classes,
+      UI: { loading }
+    } = this.props;
+    const { errors } = this.state;
 
     return (
       <Grid container className={classes.form}>
@@ -137,7 +124,7 @@ export class login extends Component {
             </Button>
             <br />
             <small>
-              Dont have an account? Sign up <Link to="/signup">here</Link>
+              dont have an account ? sign up <Link to="/signup">here</Link>
             </small>
           </form>
         </Grid>
@@ -148,7 +135,22 @@ export class login extends Component {
 }
 
 login.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(login);
+const mapStateToProps = state => ({
+  user: state.user,
+  UI: state.UI
+});
+
+const mapActionsToProps = {
+  loginUser
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(login));
