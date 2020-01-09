@@ -67,8 +67,8 @@ class login extends Component {
   };
   render() {
     const {
-      classes,
-      UI: { loading }
+      classes
+      // UI: { loading }
     } = this.props;
     const { errors } = this.state;
 
@@ -115,12 +115,10 @@ class login extends Component {
               variant="contained"
               color="primary"
               className={classes.button}
-              disabled={loading}
+              // disabled={loading}
             >
               Login
-              {loading && (
-                <CircularProgress size={30} className={classes.progress} />
-              )}
+              {<CircularProgress size={30} className={classes.progress} />}
             </Button>
             <br />
             <small>
