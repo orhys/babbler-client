@@ -68,7 +68,6 @@ export class login extends Component {
       errors: {}
     };
   }
-  // used new React Async Rendering
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({ errors: nextProps.UI.errors });
