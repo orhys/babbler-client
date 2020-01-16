@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import AppIcon from "../images/icon.png";
 import { Link } from "react-router-dom";
 
-// MUI Stuff
+// Material-UI Core
 import {
   withStyles,
   Typography,

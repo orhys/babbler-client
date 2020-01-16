@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import AppIcon from "../images/icon.png";
 
+// Material-UI Core
 import {
   withStyles,
   Typography,

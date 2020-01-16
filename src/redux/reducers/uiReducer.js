@@ -1,7 +1,7 @@
-import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types";
+import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI, LOADING_USER } from "../types";
 
 const initialState = {
-  loading: false,
+  authenticated: false,
   errors: null
 };
 
