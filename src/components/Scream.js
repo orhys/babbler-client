@@ -33,11 +33,11 @@ export class Scream extends Component {
         body,
         createdAt,
         userImage,
-        userHandle,
-        screamId,
-        likeCount,
-        commentCount
-      }
+        userHandle
+        // screamId
+        // likeCount,
+        // commentCount
+      },
     } = this.props;
     return (
       <Card className={classes.card}>
