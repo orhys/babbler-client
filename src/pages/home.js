@@ -25,10 +25,10 @@ export class home extends Component {
         <Scream key={scream.screamId} scream={scream} />
       ))
     ) : (
-      <p>Loading ...</p>
+      <p>Loading...</p>
     );
     return (
-      <Grid container spacing={10}>
+      <Grid container spacing={16}>
         <Grid item sm={8} xs={12}>
           {recentScreamsMarkup}
         </Grid>

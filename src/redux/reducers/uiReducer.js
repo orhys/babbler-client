@@ -1,8 +1,9 @@
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types";
 
 const initialState = {
-  authenticated: false,
-  errors: null
+  // authenticated: false,
+  errors: null,
+  loading: false
 };
 
 export default function(state = initialState, action) {
