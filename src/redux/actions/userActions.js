@@ -9,7 +9,7 @@ import {
 } from "../types";
 import axios from "axios";
 
-export const loginUser = (userData, history) => dispatch => {
+export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
     .post("/login", userData)
