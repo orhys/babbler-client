@@ -1,71 +1,31 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import AppIcon from "../images/icon.png";
+import React, { Component } from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
+import PropTypes from 'prop-types';
+import AppIcon from '../images/icon.png';
+import { Link } from 'react-router-dom';
 
-// Material-UI Core
-import {
-  withStyles,
-  Typography,
-  Grid,
-  TextField,
-  Button,
-  CircularProgress
-} from "@material-ui/core";
+// MUI Stuff
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+// Redux stuff
+import { connect } from 'react-redux';
+import { signupUser } from '../redux/actions/userActions';
 
-import { connect } from "react-redux";
-import { signupUser } from "../redux/actions/userActions";
-
-const styles = theme => ({
-  typography: {
-    useNextVariants: true
-  },
-  form: {
-    textAlign: "center"
-  },
-  image: {
-    margin: "20px auto 20px auto"
-  },
-  pageTitle: {
-    margin: "10px auto 10px auto"
-  },
-  textField: {
-    margin: "10px auto 10px auto"
-  },
-  button: {
-    marginTop: 20,
-    position: "relative"
-  },
-  customError: {
-    color: "red",
-    fontSize: "0.8rem",
-    marginTop: 10
-  },
-  progress: {
-    position: "absolute"
-  },
-  invisibleSeparator: {
-    border: "none",
-    margin: 4
-  },
-  visibleSeparator: {
-    width: "100%",
-    borderBottom: "1px solid rgba(0,0,0,0.1)",
-    marginBottom: 20
-  },
-  paper: {
-    padding: 20
-  }
+const styles = (theme) => ({
+  ...theme
 });
 
-export class signup extends Component {
+class signup extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
-      confirmPassword: "",
-      handle: "",
+      email: '',
+      password: '',
+      confirmPassword: '',
+      handle: '',
       errors: {}
     };
   }
@@ -74,7 +34,7 @@ export class signup extends Component {
       this.setState({ errors: nextProps.UI.errors });
     }
   }
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
       loading: true
@@ -87,7 +47,7 @@ export class signup extends Component {
     };
     this.props.signupUser(newUserData, this.props.history);
   };
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -105,7 +65,7 @@ export class signup extends Component {
         <Grid item sm>
           <img src={AppIcon} alt="monkey" className={classes.image} />
           <Typography variant="h2" className={classes.pageTitle}>
-            Signup
+            SignUp
           </Typography>
           <form noValidate onSubmit={this.handleSubmit}>
             <TextField
@@ -168,14 +128,14 @@ export class signup extends Component {
               className={classes.button}
               disabled={loading}
             >
-              Signup
+              SignUp
               {loading && (
                 <CircularProgress size={30} className={classes.progress} />
               )}
             </Button>
             <br />
             <small>
-              Already have an account? Login <Link to="/login">here</Link>
+              Already have an account ? Login <Link to="/login">here</Link>
             </small>
           </form>
         </Grid>
@@ -189,14 +149,15 @@ signup.propTypes = {
   classes: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
-  signupUser: PropTypes.object.isRequired
+  signupUser: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
   UI: state.UI
 });
 
-export default connect(mapStateToProps, { signupUser })(
-  withStyles(styles)(signup)
-);
+export default connect(
+  mapStateToProps,
+  { signupUser }
+)(withStyles(styles)(signup));

@@ -4,7 +4,7 @@ import "./App.css";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import jwtDecode from "jwt-decode";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/layout/Navbar";
 import themeObject from "./util/theme";
 import AuthRoute from "./util/AuthRoute";
 
@@ -42,7 +42,6 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <Provider store={store}>
-          <div className="App">
             <Router>
               <Navbar />
               <div className="container">
@@ -54,7 +53,6 @@ class App extends Component {
                 </Switch>
               </div>
             </Router>
-          </div>
         </Provider>
       </MuiThemeProvider>
     );

@@ -1,70 +1,29 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import AppIcon from "../images/icon.png";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
+import PropTypes from 'prop-types';
+import AppIcon from '../images/icon.png';
+import { Link } from 'react-router-dom';
 
-// Material-UI Core
-import {
-  withStyles,
-  Typography,
-  Grid,
-  TextField,
-  Button,
-  CircularProgress
-} from "@material-ui/core";
-
+// MUI Stuff
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 // Redux stuff
-import { connect } from "react-redux";
-import { loginUser } from "../redux/actions/userActions";
+import { connect } from 'react-redux';
+import { loginUser } from '../redux/actions/userActions';
 
-const styles = theme => ({
-  typography: {
-    useNextVariants: true
-  },
-  form: {
-    textAlign: "center"
-  },
-  image: {
-    margin: "20px auto 20px auto"
-  },
-  pageTitle: {
-    margin: "10px auto 10px auto"
-  },
-  textField: {
-    margin: "10px auto 10px auto"
-  },
-  button: {
-    marginTop: 20,
-    position: "relative"
-  },
-  customError: {
-    color: "red",
-    fontSize: "0.8rem",
-    marginTop: 10
-  },
-  progress: {
-    position: "absolute"
-  },
-  invisibleSeparator: {
-    border: "none",
-    margin: 4
-  },
-  visibleSeparator: {
-    width: "100%",
-    borderBottom: "1px solid rgba(0,0,0,0.1)",
-    marginBottom: 20
-  },
-  paper: {
-    padding: 20
-  }
+const styles = (theme) => ({
+  ...theme
 });
 
-export class login extends Component {
+class login extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       errors: {}
     };
   }
@@ -73,7 +32,7 @@ export class login extends Component {
       this.setState({ errors: nextProps.UI.errors });
     }
   }
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     const userData = {
       email: this.state.email,
@@ -81,7 +40,7 @@ export class login extends Component {
     };
     this.props.loginUser(userData, this.props.history);
   };
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -162,7 +121,7 @@ login.propTypes = {
   UI: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
   UI: state.UI
 });
