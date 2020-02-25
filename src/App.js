@@ -24,6 +24,9 @@ import axios from "axios";
 
 const theme = createMuiTheme(themeObject);
 
+axios.defaults.baseURL = 'https://us-east1-babbler-2ff4e.cloudfunctions.net/api';
+
+
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);

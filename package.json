@@ -1,5 +1,5 @@
 {
-  "name": "socialape-client",
+  "name": "babbler-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,5 +33,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "https://us-east1-social-ape-e4a2a.cloudfunctions.net/api"
+  "proxy": "https://us-east1-babbler-2ff4e.cloudfunctions.net/api"
 }
